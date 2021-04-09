@@ -10,9 +10,9 @@
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
-                                <inertia-link :href="route('dashboard')">
-                                    <jet-application-mark class="block h-9 w-auto" />
-                                </inertia-link>
+                                <a href="/">
+                                    <img src="public/img/logo-login.png" class="block w-auto" />
+                                </a>
                             </div>
 
                             <!-- Navigation Links -->
@@ -24,60 +24,6 @@
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
-                            <div class="ml-3 relative">
-                                <!-- Teams Dropdown -->
-                                <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
-                                                {{ $page.props.user.current_team.name }}
-
-                                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
-
-                                    <template #content>
-                                        <div class="w-60">
-                                            <!-- Team Management -->
-                                            <template v-if="$page.props.jetstream.hasTeamFeatures">
-                                                <div class="block px-4 py-2 text-xs text-gray-400">
-                                                    Manage Team
-                                                </div>
-
-                                                <!-- Team Settings -->
-                                                <jet-dropdown-link :href="route('teams.show', $page.props.user.current_team)">
-                                                    Team Settings
-                                                </jet-dropdown-link>
-
-                                                <jet-dropdown-link :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
-                                                    Create New Team
-                                                </jet-dropdown-link>
-
-                                                <div class="border-t border-gray-100"></div>
-
-                                                <!-- Team Switcher -->
-                                                <div class="block px-4 py-2 text-xs text-gray-400">
-                                                    Switch Teams
-                                                </div>
-
-                                                <template v-for="team in $page.props.user.all_teams" :key="team.id">
-                                                    <form @submit.prevent="switchToTeam(team)">
-                                                        <jet-dropdown-link as="button">
-                                                            <div class="flex items-center">
-                                                                <svg v-if="team.id == $page.props.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                                <div>{{ team.name }}</div>
-                                                            </div>
-                                                        </jet-dropdown-link>
-                                                    </form>
-                                                </template>
-                                            </template>
-                                        </div>
-                                    </template>
-                                </jet-dropdown>
-                            </div>
 
                             <!-- Settings Dropdown -->
                             <div class="ml-3 relative">
@@ -212,27 +158,29 @@
                         </div>
                     </div>
                 </div>
-                <header>
-                    <div class="grid grid-flow-row auto-rows-max">
+
+            </nav>
+
+            <header class="bg-white shadow">
+                <div class="head grid grid-rows-3 grid-flow-col justify-center">
                     <a href="/dashboard">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        Dashboard
-                    </h2>
+                        <h2 class="font-semibold text-xl text-gray-800 hover:bg-gray-300 rounded">
+                            Dashboard
+                        </h2>
                     </a>
                     <a href="/conta">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        Clients
-                    </h2>
+                        <h2 class="font-semibold text-xl text-gray-800 hover:bg-gray-300 rounded">
+                            Clients
+                        </h2>
                     </a>
 
                     <a href="/database">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                          Databases
-                    </h2>
+                        <h2 class="font-semibold text-xl text-gray-800 hover:bg-gray-300 rounded">
+                            Databases
+                        </h2>
                     </a>
-                    </div>
-                </header>
-            </nav>
+                </div>
+            </header>
 
             <main>
                 <slot></slot>
@@ -281,5 +229,13 @@
     }
 </script>
 <style scoped>
+.head{
+    display: flex;
+}
+h2 {
+    padding: 10px;
+    width: border-box;
+    vertical-align: middle;
+}
 
 </style>

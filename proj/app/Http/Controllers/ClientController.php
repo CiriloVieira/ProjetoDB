@@ -20,7 +20,23 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         Client::create($request->all());
-        return redirect()->back()->with('message', 'Criado com sucesso');
+        return redirect()->back();
+    }
+
+    public function update(Request $request)
+    {
+        if($request->has('id')){
+            Client::find($request->input('id'))->update($request->all());
+            return redirect()->back();
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        if($request->has('id')){
+            Client::find($request['id'])->delete();
+            return redirect()->back();
+        }
     }
 
     public function model()

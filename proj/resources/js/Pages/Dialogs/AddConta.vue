@@ -33,7 +33,7 @@
                                 :disabled="!valid"
                                 color="success"
                                 class="mr-4"
-                                @click="()=>{}"=
+                                @click="()=>{}"
                             >
                                 Validate
                             </v-btn>
