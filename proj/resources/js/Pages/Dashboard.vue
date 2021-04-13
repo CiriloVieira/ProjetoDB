@@ -6,6 +6,7 @@
             </h2>
         </template>
 
+        <div>teste</div>
 
     </app-layout>
 
@@ -19,5 +20,10 @@
         components: {
             AppLayout,
         },
+
+        data () {
+
+        }
+
     }
 </script>

@@ -21,6 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/client', [\App\Http\Controllers\ClientController::class, 'index']);
 Route::post('/client', [\App\Http\Controllers\ClientController::class, 'store']);
 
-Route::post('database', [\App\Http\Controllers\DatabaseController::class, 'store']);
+Route::post('/database', [\App\Http\Controllers\DatabaseController::class, 'store']);
 
 

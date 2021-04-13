@@ -3,16 +3,15 @@
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                Contas
-
             </h2>
         </template>
 
-        <table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-200 text-gray-800">
-           <div class="m-5 w-5/6">
-                <button id="show-modal" @click="addDialog = !addDialog, clearForm()" class="bg-green-500 hover:bg-green-700 text-white font-bold rounded-full">Inserir</button>
-           </div>
+        <div class="m-5 w-5/6 flow-root">
+            <button id="show-modal" @click="addDialog = !addDialog; clearForm()" class="bg-green-500 hover:bg-green-700 text-white font-bold rounded-full float-right">Inserir +</button>
+        </div>
 
-            <tr class="text-left border-b-2 border-gray-300">
+        <table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-800">
+            <tr class="text-left border-b-2 border-gray-300 text-gray-200">
                 <th class="px-4 py-3">Razão Social</th>
                 <th class="px-4 py-3">Data Pagemento</th>
                 <th class="px-4 py-3">Valor Recorrente</th>
@@ -22,15 +21,19 @@
 
             </tr>
 
-            <tr class="bg-gray-100 border-b border-gray-200" v-for="row in data">
+            <tr class="bg-gray-100 border-b border-gray-200 hover:bg-gray-300 text-gray-800" id="tablerow" v-for="row in data" @dblclick="openRow(row)">
                 <td class="px-4 py-3">{{ row['razao_social'] }}</td>
                 <td class="px-4 py-3">{{ row['dt_pagamento']}}</td>
                 <td class="px-4 py-3">{{ row['vlr_recorrente']}}</td>
                 <td class="px-4 py-3">{{ row['expire_date']}}</td>
 
-                <button @click="openRow(row)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full">Edit</button>
+
+                <button @click="openRow(row)">
+                    <img src="../../../public/img/edit2.png" height="30" width="30"/></button>
                 <span> / </span>
-                <button @click="deleteRow(row)" class="bg-red-500 hover:bg-red-700 text-white font-bold rounded-full">Delete</button>
+                <button @click="deleteRow(row)">
+                 <img src="../../../public/img/delete.png" height="30" width="30"/>
+                </button>
 
             </tr>
 
@@ -39,6 +42,8 @@
 
                 <div class="relative mx-auto w-auto max-w-2xl">
                     <div id="form-body" class="bg-white w-auto pa-10">
+                        <h5 v-show="addDialog"><b>Adicionar um novo:</b></h5>
+                        <h5 v-show="editDialog"><b>Editar um item:</b></h5>
 
                     <div class="form-field">
                         <label>Razão Social: </label>
@@ -66,6 +71,7 @@
                     </div>
 
                         <div class="form-footer">
+
                             <button v-show="addDialog" @click="save(form)" class="bg-green-500 text-white font-bond rounded-full">Adicionar</button>
                             <button v-show="addDialog" @click="addDialog =!addDialog" class="bg-red-500 text-white font-bold rounded-full">Fechar</button>
 
@@ -167,6 +173,25 @@ export default {
 }
 #form-body{
    border: solid 2.5px;
+}
+#form input {
+    /*display: block;*/
+    width: 260px;
+    height: 30px;
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin: 7px;
+    font-size: 17px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.05);
+    border-style: solid;
+}
+#form button {
+    float: right;
+}
+.form-footer{
+    display: flow-root;
 }
 
 button {

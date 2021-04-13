@@ -6,14 +6,46 @@ use App\Models\Database;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Traits\CrudTrait;
+use App\Models\Client;
 
 class DatabaseController extends Controller
 {
     use CrudTrait;
 
-    public function model(){
+    public function index()
+    {
+        $data = Database::all();
+        $client = Client::all();
+        return Inertia::render('Database', ['data' => $data, 'clients'=> $client]);
+    }
+
+    public function store(Request $request)
+    {
+        Database::create($request->all());
+        return redirect()->back();
+    }
+
+    public function update(Request $request)
+    {
+        if($request->has('id')){
+            Database::find($request->input('id'))->update($request->all());
+            return redirect()->back();
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        if($request->has('id')){
+            Database::find($request['id'])->delete();
+            return redirect()->back();
+        }
+    }
+
+    public function model()
+    {
         return Database::class;
     }
+
     public function validationRules($resource_id = 0)
     {
         // TODO: Implement validationRules() method.
@@ -21,48 +53,5 @@ class DatabaseController extends Controller
     public function validationRulesId($resource_id = 0)
     {
         // TODO: Implement validationRulesId() method.
-    }
-    public function index()
-    {
-        $data = Database::all();
-        return Inertia::render('Database', ['data' => $data]);
-    }
-
-
-//    public function create(Request $request)
-//    {
-//        Database::create($request->all());
-//        return response('criado');
-//    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function show(database $database)
-    {
-        //
-    }
-
-
-    public function edit(database $database)
-    {
-        //
-    }
-
-
-
-    public function update(Request $request, database $database)
-    {
-        //
-    }
-
-
-    public function destroy(database $database)
-    {
-        //
     }
 }

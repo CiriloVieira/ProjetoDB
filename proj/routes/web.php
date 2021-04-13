@@ -25,18 +25,19 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-//Route::middleware(['auth:sanctum', 'verified'])->get('/conta', function () {
-//    return Inertia::render('Conta');
-//})->name('conta');
-
 Route::resource('conta', \App\Http\Controllers\ClientController::class);
-//Route::get('conta', [\App\Http\Controllers\ClientController::class, 'index']);
-//Route::post('conta', [\App\Http\Controllers\ClientController::class, 'store']);
 Route::patch("conta/{id}", [\App\Http\Controllers\ClientController::class, 'update']);
 Route::delete("conta/{id}", [\App\Http\Controllers\ClientController::class, 'destroy']);
+
+Route::resource('database', \App\Http\Controllers\DatabaseController::class);
+Route::patch("database/{id}", [\App\Http\Controllers\ClientController::class, 'update']);
+Route::delete("database/{id}", [\App\Http\Controllers\ClientController::class, 'destroy']);
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::get('database', [\App\Http\Controllers\DatabaseController::class, 'index']);
+
+
+
